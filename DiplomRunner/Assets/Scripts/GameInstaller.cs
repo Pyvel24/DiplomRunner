@@ -13,7 +13,7 @@ namespace DefaultNamespace
                 .WithInitialSize(2)
                 .FromNewComponentOnNewPrefab(levelViewPrefab);
 
-            Container.BindInterfacesTo<Test>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<Test>().AsSingle().NonLazy();
         }
         
         
