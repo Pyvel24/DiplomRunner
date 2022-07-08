@@ -6,14 +6,14 @@ using Zenject;
 
 namespace DefaultNamespace
 {
-    public class Test
+    public class Test 
     {
         private int offset = 30;
-        private float speed = 0.1f;
         private readonly LevelView.Pool _pool;
         private int _counter = 1;
         private Queue<LevelView> _queue;
- 
+        
+        
         public Test(LevelView.Pool pool)
         {
             _pool = pool;
@@ -22,6 +22,7 @@ namespace DefaultNamespace
             _queue.Enqueue(_pool.Spawn(new Vector3(0, 2, offset)));
             Drug();
         }
+        
 
         public async UniTaskVoid Drug()
         {
@@ -33,4 +34,5 @@ namespace DefaultNamespace
             Drug();
         }
     }
+    
 }
