@@ -1,43 +1,46 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Zenject;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement: MonoBehaviour
+
 {
-    private Rigidbody _rigidBody;
-    
-    [SerializeField] private float directForce;
-    [SerializeField] private float turnForce;
-    [SerializeField] private float maxSpeed;
-    [SerializeField] private float currentSpeed;
-    
-   private void Awake ()
+    private void Update()
     {
-        _rigidBody = GetComponent<Rigidbody>();
-    }
-   
-
-   private void FixedUpdate()
-    {
-        _rigidBody.AddForce(0,0,directForce*Time.fixedTime);
-        var velocity = _rigidBody.velocity;
-        _rigidBody.velocity = new Vector3(velocity.x, velocity.y, Math.Min(velocity.z, maxSpeed));
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.A))
         {
-            _rigidBody.AddForce(turnForce*Time.deltaTime, 0, directForce);
+            gameObject.transform.DOMoveX(-0.89f, 1.5f);
         }
-
-        else if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.D))
         {
-            _rigidBody.AddForce(-turnForce*Time.deltaTime, 0, directForce);
+            gameObject.transform.DOMoveX(0.89f, 1.5f);
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            gameObject.transform.DOMoveX(-0.08f, 1.5f);
         }
     }
 
-   public class Factory : PlaceholderFactory<PlayerMovement>
-   {
-       
-   }
+    public class Factory: PlaceholderFactory<Vector3,PlayerMovement>
+    {
+        private readonly DiContainer _container;
 
+        public Factory(DiContainer container)
+        {
+            _container = container;
+        }
+        
+        public override PlayerMovement Create(Vector3 param)
+        {
+            var playerMovement =Instantiate(_container.Resolve<PlayerMovement>(), Camera.main.transform);
+            Transform transform1;
+            (transform1 = playerMovement.transform).Rotate(-6,0,0);
+            transform1.position = param;
+            return playerMovement;
+        }
+        
+    }
+    
 }
