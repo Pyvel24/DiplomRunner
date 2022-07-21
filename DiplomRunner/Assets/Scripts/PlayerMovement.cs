@@ -13,13 +13,13 @@ public class PlayerMovement: MonoBehaviour
         {
             gameObject.transform.DOMoveX(-0.89f, 1.5f);
         }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            gameObject.transform.DOMoveX(-0.06f, 1.5f);
+        }
         else if (Input.GetKey(KeyCode.D))
         {
             gameObject.transform.DOMoveX(0.89f, 1.5f);
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            gameObject.transform.DOMoveX(-0.08f, 1.5f);
         }
     }
 
@@ -34,10 +34,12 @@ public class PlayerMovement: MonoBehaviour
         
         public override PlayerMovement Create(Vector3 param)
         {
-            var playerMovement =Instantiate(_container.Resolve<PlayerMovement>(), Camera.main.transform);
-            Transform transform1;
-            (transform1 = playerMovement.transform).Rotate(-6,0,0);
-            transform1.position = param;
+            var playerMovement =_container.Resolve<PlayerMovement>();
+
+            Transform transform;
+            (transform = playerMovement.transform).Rotate(0,0,0);
+            transform.position = param;
+            transform.parent = Camera.main.transform;
             return playerMovement;
         }
         
