@@ -11,15 +11,15 @@ public class PlayerMovement: MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
-            gameObject.transform.DOMoveX(-0.89f, 1.5f);
+            gameObject.transform.DOMoveX(-0.94f, 1.2f);
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            gameObject.transform.DOMoveX(-0.06f, 1.5f);
+            gameObject.transform.DOMoveX(-0.01f, 1.2f);
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            gameObject.transform.DOMoveX(0.89f, 1.5f);
+            gameObject.transform.DOMoveX(0.94f, 1.2f);
         }
     }
 
