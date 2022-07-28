@@ -1,12 +1,17 @@
 ﻿using System;
+using DefaultNamespace;
 using DG.Tweening;
+using Signal;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 using Zenject;
 
 public class PlayerMovement: MonoBehaviour
-
 {
+    [Inject] private SignalBus _signalBus;
+    [Inject] private CoinView.Pool _pool;
+    
     private void Update()
     {
         if (Input.GetKey(KeyCode.A))
@@ -22,16 +27,25 @@ public class PlayerMovement: MonoBehaviour
             gameObject.transform.DOMoveX(0.94f, 1.2f);
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<CoinView>(out var coin))
+        {
+            _signalBus.Fire<CoinCollected>();
+            other.gameObject.SetActive(false);
+        }
+    }
+
+   
 
     public class Factory: PlaceholderFactory<Vector3,PlayerMovement>
     {
         private readonly DiContainer _container;
-
         public Factory(DiContainer container)
         {
             _container = container;
+            
         }
-        
         public override PlayerMovement Create(Vector3 param)
         {
             var playerMovement =_container.Resolve<PlayerMovement>();
@@ -42,7 +56,5 @@ public class PlayerMovement: MonoBehaviour
             transform.parent = Camera.main.transform;
             return playerMovement;
         }
-        
     }
-    
 }
