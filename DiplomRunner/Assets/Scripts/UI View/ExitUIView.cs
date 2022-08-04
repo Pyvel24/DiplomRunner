@@ -12,8 +12,7 @@ namespace UI_View
 
         private void Awake()
         {
-            Initialize();
-            disagreeButton.onClick.AddListener((() => GameContext.Instance.ShowView(nameof(MainMenuUIView))));
+            disagreeButton.onClick.AddListener(() => GameContext.Instance.ShowView(nameof(MainMenuUIView)));
             agreeButton.onClick.AddListener(Application.Quit);
         }
 
