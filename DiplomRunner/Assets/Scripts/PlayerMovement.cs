@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using DefaultNamespace;
 using DG.Tweening;
+using Scripts;
 using Signal;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +13,8 @@ public class PlayerMovement: MonoBehaviour
 {
     [Inject] private SignalBus _signalBus;
     [Inject] private CoinView.Pool _pool;
-    
+    [Inject] private SignalBus _signal;
+   
     private void Update()
     {
         if (Input.GetKey(KeyCode.A))
@@ -26,6 +29,8 @@ public class PlayerMovement: MonoBehaviour
         {
             gameObject.transform.DOMoveX(0.94f, 1.2f);
         }
+        
+        
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -34,6 +39,12 @@ public class PlayerMovement: MonoBehaviour
             _signalBus.Fire<CoinCollected>();
             other.gameObject.SetActive(false);
         }
+
+        if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Obstacle"))
+        {
+            _signal.Fire<Health>();
+        }
+        
     }
 
    
