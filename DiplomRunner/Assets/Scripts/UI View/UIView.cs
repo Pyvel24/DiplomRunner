@@ -1,8 +1,10 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
 
 namespace UI_View
 {
+    [Serializable]
     public abstract  class UIView : MonoBehaviour
     {
         public abstract string ViewName { get;  }
