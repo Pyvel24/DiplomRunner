@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 public class LevelView : MonoBehaviour
@@ -10,6 +8,7 @@ public class LevelView : MonoBehaviour
         protected override void Reinitialize(Vector3 p1, LevelView item)
         {
             item.transform.position = p1;
+            
         }
     }
 }
