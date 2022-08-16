@@ -170,9 +170,10 @@ GameObject:
   - component: {fileID: 5892591606269565264}
   - component: {fileID: 5902709709568775862}
   - component: {fileID: 5864041133126410106}
+  - component: {fileID: 884213911901148248}
   m_Layer: 0
   m_Name: Sedan
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -254,6 +255,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c2e827b550481889283c4cef93713f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &884213911901148248
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5889276786646914764}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.4977287, y: 0.45750988, z: 1.1769468}
+  m_Center: {x: -0.00000590086, y: 0.29677695, z: 0.0000014305115}
 --- !u!1 &5889277024135229606
 GameObject:
   m_ObjectHideFlags: 0
