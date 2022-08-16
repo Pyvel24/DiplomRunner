@@ -17,7 +17,7 @@ public class RoadGenerator: IDisposable
     {
         _pool = pool;
         _factory = factory;
-        _factory.Create(new Vector3(-0.01f,1.7f,4f));
+        _factory.Create(new Vector3(-0.01f,1.6f,4f));
         _roadQueue = new Queue<LevelView>();
         _roadQueue.Enqueue(_pool.Spawn(new Vector3(0, 3.8f, 0)));
         _roadQueue.Enqueue(_pool.Spawn(new Vector3(0, 3.8f, offset)));
