@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks.Triggers;
 using DefaultNamespace.Interfaces;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,7 +10,6 @@ namespace Services
     {
         private Scene _currentScene;
         private ISceneService _sceneServiceImplementation;
-
         public SceneService()
         {
             _currentScene = SceneManager.GetActiveScene();
@@ -17,15 +17,16 @@ namespace Services
 
         public AsyncOperation LoadScene(string name)
         {
+            
             var asyncOperation = SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
             IsLoading = true;
             asyncOperation.completed += operation =>
             {
                 var scene = SceneManager.GetSceneByName(name);
-                
                 SceneManager.SetActiveScene(scene);
                 _currentScene = scene;
                 IsLoading = false;
+                
             };
             return asyncOperation;
         }
@@ -34,6 +35,8 @@ namespace Services
         {
             return SceneManager.UnloadSceneAsync(name);
         }
+
+       
 
         public bool IsLoading { get; private set; }
         public IEnumerable<GameObject> GetActiveRoots()
