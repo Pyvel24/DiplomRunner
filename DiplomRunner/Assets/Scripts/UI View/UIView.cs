@@ -1,5 +1,6 @@
 ﻿using System;
 using DG.Tweening;
+using Interfaces;
 using UnityEngine;
 
 namespace UI_View
@@ -8,7 +9,6 @@ namespace UI_View
     public abstract  class UIView : MonoBehaviour
     {
         public abstract string ViewName { get;  }
-
         protected void Initialize()
         {
             transform.localScale=Vector3.zero;
