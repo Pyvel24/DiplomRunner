@@ -56,13 +56,13 @@ namespace Scripts
             switch (taxiPosition)
             {
                 case TaxiPosition.Left:
-                    _taxiViews.Add(_pool.Spawn(new Vector3(0.94f,1.7f,z)));
+                    _taxiViews.Add(_pool.Spawn(new Vector3(0.94f,1.62f,z)));
                     break;
                 case TaxiPosition.Center:
-                    _taxiViews.Add(_pool.Spawn(new Vector3(-0.01f,1.7f,z)));
+                    _taxiViews.Add(_pool.Spawn(new Vector3(-0.01f,1.62f,z)));
                     break;
                 case TaxiPosition.Right:
-                    _taxiViews.Add(_pool.Spawn(new Vector3(-0.94f,1.7f,z)));
+                    _taxiViews.Add(_pool.Spawn(new Vector3(-0.94f,1.62f,z)));
                     break;
             }
         }
