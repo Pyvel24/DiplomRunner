@@ -11,24 +11,20 @@ namespace UI_View
     public class PauseUI : UIView
     {
         [SerializeField] private GameObject pauseMenu;
-        [SerializeField] private Button buttonreplay;
         [SerializeField] private Button buttonPause;
         [SerializeField] private Button continueButton;
         [SerializeField] private Button menuButton;
+        [SerializeField] private AudioSource menu;
+        [SerializeField] private AudioSource resume;
+        [SerializeField] private AudioSource pause;
+        
         private bool PauseGame;
 
         public void Awake()
         {  Initialize();
            buttonPause.onClick.AddListener(Pause);
            continueButton.onClick.AddListener(Resume);
-           buttonreplay.onClick.AddListener(Restart);
-           menuButton.onClick.AddListener(() =>
-           {   Debug.Log("game over");
-               GameContext.Instance.ShowView(nameof(GameOverUIView));
-               var scene = SceneManager.GetActiveScene().name;
-               GameContext.Instance.SceneService.UnLoadScene(scene);
-               Debug.Log(scene);
-           });
+           menuButton.onClick.AddListener(ToMenu);
         }
 
         public void Start()
@@ -51,6 +47,7 @@ namespace UI_View
            pauseMenu.SetActive(false);
            Time.timeScale = 1f;
            PauseGame = false;
+           resume.Play();
         }
 
         private void Pause()
@@ -58,12 +55,17 @@ namespace UI_View
             pauseMenu.SetActive(true);
             Time.timeScale = 0f;
             PauseGame = true;
+            pause.Play();
         }
 
-        private void Restart()
+        private void ToMenu()
         {
-            
+            SceneManager.LoadScene(0);
+            Time.timeScale = 1f;
+            menu.Play();
         }
+
+       
         public override string ViewName => nameof(PauseUI);
     }
 }
