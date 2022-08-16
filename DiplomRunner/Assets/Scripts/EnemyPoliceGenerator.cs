@@ -58,13 +58,13 @@ namespace DefaultNamespace
             switch (enemyPosition)
             {
                 case EnemyPosition.Left:
-                    _enemyViews.Add(_enemyPool.Spawn(new Vector3(0.94f,1.7f,z)));
+                    _enemyViews.Add(_enemyPool.Spawn(new Vector3(0.94f,1.62f,z)));
                     break;
                 case EnemyPosition.Center:
-                    _enemyViews.Add(_enemyPool.Spawn(new Vector3(-0.01f,1.7f,z)));
+                    _enemyViews.Add(_enemyPool.Spawn(new Vector3(-0.01f,1.62f,z)));
                     break;
                 case EnemyPosition.Right:
-                    _enemyViews.Add(_enemyPool.Spawn(new Vector3(-0.94f,1.7f,z)));
+                    _enemyViews.Add(_enemyPool.Spawn(new Vector3(-0.94f,1.62f,z)));
                     break;
             }
         }
