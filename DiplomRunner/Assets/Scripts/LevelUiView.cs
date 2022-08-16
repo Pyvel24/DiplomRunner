@@ -15,8 +15,10 @@ namespace DefaultNamespace
         [SerializeField] private Text timeText;
         [SerializeField] private Text coinView;
         [SerializeField] private Text scoreText;
+        [SerializeField] private Text highScoreText;
         private int _coins = 0;
         private int _health = 5;
+        private int _highscore;
 
         [Inject] private SignalBus _signalBus;
         [Inject] private SignalBus _signal;
@@ -26,11 +28,14 @@ namespace DefaultNamespace
         [SerializeField] private GameObject lifeFour;
         [SerializeField] private GameObject lifeFive;
         public static float RealTime;
-
+        public static float CoinDisp;
+        public static float ScoreDisp;
+        public static float HighScoreDisp;
         private void Start()
         {
             _signalBus.Subscribe<CoinCollected>(() => _coins++);
             _signal.Subscribe<Health>((() => _health = _health - 1));
+            
         }
 
         private void DisplayTime(float timeToDisplay)
@@ -43,10 +48,25 @@ namespace DefaultNamespace
         private void Update()
         {
             coinView.text = _coins.ToString();
+            CoinDisp = _coins;
             RealTime += Time.deltaTime;
             DisplayTime(RealTime);
-            scoreText.text = ((int)(Camera.main.transform.position.z)).ToString();
+           int lastScore =  int.Parse(scoreText.text = ((int) (Camera.main.transform.position.z)).ToString());
+           PlayerPrefs.SetInt("lastScore", lastScore);
            
+           int recordScore = PlayerPrefs.GetInt("recordScore");
+           if (lastScore > recordScore)
+           {
+               recordScore = lastScore;
+               PlayerPrefs.SetInt("recordScore", recordScore);
+               highScoreText.text = recordScore.ToString();
+           }
+           else
+           {
+               highScoreText.text = recordScore.ToString();
+           }
+           ScoreDisp = ((int) (Camera.main.transform.position.z));
+           HighScoreDisp = recordScore;
             if (_health == 4)
             {
                 lifeFive.SetActive(false);
@@ -80,12 +100,12 @@ namespace DefaultNamespace
                 lifeThree.SetActive(false);
                 lifeTwo.SetActive(false);
                 lifeOne.SetActive(false);
-                Debug.Log("game over");
-                GameContext.Instance.ShowView(nameof(GameOverUIView));
+                GameContext.Instance.ShowView(nameof(LevelCompleteUIView));
                 var scene = SceneManager.GetActiveScene().name;
                 GameContext.Instance.SceneService.UnLoadScene(scene);
-                Debug.Log(scene);
             }
+            
+
         }
     }
 }
